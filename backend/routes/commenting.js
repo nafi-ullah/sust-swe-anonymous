@@ -41,17 +41,18 @@ commentRouter.post("/api/comment", async (req, res) => {
   //http://localhost:3000/api/get-candidates?post=assistant_general_secretary&year=2024
 
 
-//   postRouter.get("/api/post", async (req, res) => {
-//     try {
+  commentRouter.get("/api/comments", async (req, res) => {
+    try {
+        const postid = req.query.postid;
      
-//       const posts = await PostInfo.find({});
+      const comments = await CommentInfo.find({postid});
       
   
-//       res.json( posts);
-//     } catch (e) {
-//       res.status(500).json({ error: e.message });
-//     }
-//   });
+      res.json( comments);
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
 
   
 
