@@ -41,30 +41,17 @@ postRouter.post("/api/post", async (req, res) => {
   //http://localhost:3000/api/get-candidates?post=assistant_general_secretary&year=2024
 
 
-//   candidateRouter.get("/api/get-candidates", async (req, res) => {
-//     try {
+  postRouter.get("/api/post", async (req, res) => {
+    try {
      
-//       const post = req.query.post;
-//       const year =  req.query.year;
-
-//       if (!year || !post) {
-//         return res.status(400).json({ error: 'Both year and post parameters are required' });
-//       }
-
-//       const candidates = await CandidateInfo.find({
-//         year
-//       });
-//       const allCandidates = candidates.map(candidate => candidate.candidateList);
-//       const flattenedCandidates = allCandidates.flat();
-
-//       const filteredData = flattenedCandidates.filter(element => element.candidatePost === post);
-
+      const posts = await PostInfo.find({});
+      
   
-//       res.json({ candidateList: filteredData || [] });
-//     } catch (e) {
-//       res.status(500).json({ error: e.message });
-//     }
-//   });
+      res.json( posts);
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
 
   
 
