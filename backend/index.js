@@ -1,6 +1,7 @@
 const express = require("express");
 
 const mydatabase = require("mongoose");
+const postRouter = require("./routes/posting");
 
 const app = express();
 app.use((req, res, next) => {
@@ -15,6 +16,8 @@ const PORT = 5000;
 const DB =
   "mongodb+srv://sweboy:dmc54321@cluster0.trbboqn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
+  app.use(express.json());
+app.use(postRouter);
 
 mydatabase
   .connect(DB)
