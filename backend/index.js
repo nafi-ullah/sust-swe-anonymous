@@ -2,6 +2,7 @@ const express = require("express");
 
 const mydatabase = require("mongoose");
 const postRouter = require("./routes/posting");
+const commentRouter = require("./routes/commenting");
 
 const app = express();
 app.use((req, res, next) => {
@@ -18,6 +19,7 @@ const DB =
 
   app.use(express.json());
 app.use(postRouter);
+app.use(commentRouter);
 
 mydatabase
   .connect(DB)

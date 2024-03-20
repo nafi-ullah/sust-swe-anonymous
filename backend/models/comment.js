@@ -1,12 +1,12 @@
 const mymongo = require("mongoose");
 
 const commentSchema = mymongo.Schema({
-    id: {
+    postid: {
         required: true,
         type: String,
 
     },
-    comments: {
+    comment: {
         required: true,
         type: String,
     },
