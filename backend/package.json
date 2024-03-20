@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "run ./index,js",
+    "dev": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "start": "run ./index,js",
-    "dev": "nodemon ./index.js",
     "express": "^4.19.0",
     "http": "^0.0.1-security",
     "mongoose": "^8.2.2"
