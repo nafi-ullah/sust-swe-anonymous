@@ -40,7 +40,9 @@ const PostComponent = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch posts');
       }
-      const fetchedPosts = await response.json();
+      let fetchedPosts = await response.json();
+      // Sort posts based on time in descending order (latest first)
+      fetchedPosts.sort((a, b) => new Date(b.time) - new Date(a.time));
       setPosts(fetchedPosts);
     } catch (error) {
       console.error('Error fetching posts:', error.message);
