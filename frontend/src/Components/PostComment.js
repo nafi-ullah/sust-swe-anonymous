@@ -46,8 +46,7 @@
 
 // export default PostComponent;
 // //hello
-import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup, Card } from 'flowbite-react';
+import React, { useEffect, useState } from 'react';
 
 const PostComponent = () => {
   const [postContent, setPostContent] = useState('');
@@ -84,7 +83,9 @@ const PostComponent = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch posts');
       }
-      const fetchedPosts = await response.json();
+      let fetchedPosts = await response.json();
+      // Sort posts based on time in descending order (latest first)
+      fetchedPosts.sort((a, b) => new Date(b.time) - new Date(a.time));
       setPosts(fetchedPosts);
     } catch (error) {
       console.error('Error fetching posts:', error.message);
@@ -114,18 +115,13 @@ const PostComponent = () => {
       <div>
         <h2 className="text-xl font-semibold mt-8 flex justify-center">All Posts</h2>
         {posts.map(post => (
-            <div className='flex justify-center'>
-             <Card className="max-w-sm flex justify-center items-center">
-          <div key={post._id} className="max-w-md mx-auto mt-4 p-4 border border-gray-300 rounded">
-            <p className='font-normal text-gray-700 dark:text-gray-400'>{post.post}</p>
-            <p className="text-gray-500 text-sm">{post.time}</p>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2">Comment</button>
+          <div className='flex justify-center' key={post._id}>
+            <div className="max-w-md mx-auto mt-4 p-4 border border-gray-300 rounded">
+              <p className='font-normal text-gray-700 dark:text-gray-400'>{post.post}</p>
+              <p className="text-gray-500 text-sm">{post.time}</p>
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2">Comment</button>
+            </div>
           </div>
-
-          </Card>
-          </div>
-
-
         ))}
       </div>
     </div>
