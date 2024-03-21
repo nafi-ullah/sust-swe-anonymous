@@ -55,6 +55,7 @@ const PostComponent = () => {
   };
 
   const handleCommentSubmit = async (postId) => {
+    setClickable(false);
     try {
       const response = await fetch("http://swe-ngl-backend.vercel.app/api/comment", {
         method: "POST",
@@ -70,6 +71,7 @@ const PostComponent = () => {
 
       // Clear the input after successful posting
       setCommentContent("");
+      setClickable(true);
       // Refresh the comments after posting
       fetchComments(postId);
       // Update the post with the new comment count
@@ -171,12 +173,16 @@ const PostComponent = () => {
                   value={commentContent}
                   onChange={(e) => setCommentContent(e.target.value)}
                 ></textarea>
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleCommentSubmit(post._id)}
-                >
-                  Submit Comment
-                </button>
+                {
+                  clickable?(
+                    <button
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => handleCommentSubmit(post._id)}
+                    >
+                      Submit Comment
+                    </button>
+                  ):(null)
+                }
                 <div>
                   {comments && comments.length > 0 ? (
                     <div>
