@@ -3,6 +3,33 @@ import React, { useEffect, useState } from "react";
 import imgUser from "../assets/anonymous-user.png";
 import imgComment from "../assets/anonymous_comment.png";
 import imgbg from "../assets/post-bg.png";
+const placeholders = [
+  'ভার্সিটি লাইফের সবথেকে স্মরণীয় কোনো মুহূর্ত আছে? শেয়ার করুন।',
+  'ভার্সিটি লাইফের সবথেকে এনজয়েবল ইভেন্টার মেমোরি শেয়ার করুন।' ,
+  'ভার্সিটি লাইফে আপনার সবচেয়ে বড় পাওয়া গুলো শেয়ার করুন।',
+  'এমন কোনো ঘটনা আছে যেইটার জন্য আপনার মনে এখনও ক্ষোভ বা আফসোস রয়ে গেসে? থাকলে বলুন।',
+  'কারোর উপর রাগান্বিত? শেয়ার করুন, রাগ কমে যাবে।',
+  'আপনার কারো সাথে ইন্টারেকশনের ঘাটতি আছে? ইন্টারেকশন বাড়িয়ে নিন।',
+  'কারো সাথে খারাপ ব্যবহারের পর গিলটি ফিল হচ্ছে? ক্ষমা চেয়ে নিন।',
+  'এমন কেউ আছে যার সাথে এখন পর্যন্ত কোনো ধরণের ইন্টারেকশন করেন নাই? করতে চান?',
+  'আপনি কি ইন্ট্রোভার্ট? কারো সাথে ইন্টারেক্ট করতে চাইতেসেন কিন্তু পারতেসেন না? নির্দ্বিধায় ইন্টারেক্ট করুন।',
+  'ভার্সিটি লাইফে আপনার ইন্টারেকশন অনেক বেশি? ইন্টারেকশন বাড়ানো Secret Sauce গুলো শেয়ার করুন।',
+  'পারসোনাল ইস্যু যেইটা কারো সাথে শেয়ার করতে পারতেসেন না? এইখানে শেয়ার করুন। ',
+  
+  'আপনার ব্যাচে কি ঘন ঘন ইভেন্ট নামতেসে? আপনার মতামত শেয়ার করুন।',
+  
+  'আপনার ব্যাচ কি ইন্টারেকশন কেন্দ্রিক হয়ে গেসে? ইন্টারেকশন বাড়াতে আপনার মতামত শেয়ার করুন।',
+  
+  'কাছের বন্ধু মন খারাপ করে বসে আছে? তাকে হাসিমুখে ফিরিয়ে আনুন।',
+  
+  'বন্ধুদের সাথে আড্ডা দেয়ার সময় কোনো এক মুহূর্ত সবথেকে ভালো লাগসে? সবার সাথে শেয়ার করুন।',
+  ,
+  'এমন কোনো মেমোরি যেইটা আজীবন আপনার কাছে স্মরণীয় হয়ে থাকবে?',
+  
+  'আপনার আশাহতের গল্প বলুন এবং সে রিজেক্ট করার পর আপনার প্রতিক্রিয়া বলুন।'
+  
+  
+];
 
 const PostComponent = () => {
   const [postContent, setPostContent] = useState("");
@@ -105,7 +132,7 @@ const PostComponent = () => {
     else setSelectedPostId(null);
     fetchComments(postId);
   };
-
+  const randomPlaceholder = placeholders[Math.floor(Math.random() * placeholders.length)];
   return (
     <div>
       <div className="relative">
@@ -117,7 +144,7 @@ const PostComponent = () => {
         <form onSubmit={handlePostSubmit}>
           <textarea
             className="w-full h-24 p-2 mb-2 border border-gray-300 rounded"
-            placeholder="What's on your mind?"
+            placeholder={randomPlaceholder}
             value={postContent}
             onChange={(e) => setPostContent(e.target.value)}
           ></textarea>
