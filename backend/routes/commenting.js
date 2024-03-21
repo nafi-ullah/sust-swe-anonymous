@@ -1,5 +1,6 @@
 const express = require("express");
 const CommentInfo = require("../models/comment");
+const PostInfo = require("../models/post");
 const mongoose = require("mongoose");
 const moment = require('moment');
 
@@ -30,6 +31,13 @@ commentRouter.post("/api/comment", async (req, res) => {
       
       pushComment = await pushComment.save();
       console.log(pushComment);
+
+      const postId = await PostInfo.findOne({_id : postid });
+
+     
+      postId.count = postId.count + 1;
+  
+      const updatePost = await postId.save();
 
 
       return res.json(pushComment);
