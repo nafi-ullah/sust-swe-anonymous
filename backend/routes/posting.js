@@ -44,7 +44,7 @@ postRouter.post("/api/post", async (req, res) => {
   postRouter.get("/api/post", async (req, res) => {
     try {
      
-      const posts = await PostInfo.find({}).sort({ time: -1 });
+      const posts = await PostInfo.find({}).sort({ _id: -1 });
       
   
       res.json( posts);

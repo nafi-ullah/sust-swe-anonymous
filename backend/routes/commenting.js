@@ -45,7 +45,7 @@ commentRouter.post("/api/comment", async (req, res) => {
     try {
         const postid = req.query.postid;
      
-      const comments = await CommentInfo.find({postid}).sort({ time: -1 });;
+      const comments = await CommentInfo.find({postid}).sort({ _id: -1 });;
       
   
       res.json( comments);
