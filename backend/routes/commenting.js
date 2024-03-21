@@ -25,7 +25,7 @@ commentRouter.post("/api/comment", async (req, res) => {
       let pushComment = new CommentInfo({
         postid,
         comment,
-        time: moment().format('h:mma D-MMM-YYYY'),
+        time: moment().add(6, 'hours').format('h:mma D-MMM-YYYY'),
 
       });
       

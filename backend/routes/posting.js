@@ -24,7 +24,7 @@ postRouter.post("/api/post", async (req, res) => {
       let pushPost = new PostInfo({
         _id: new mongoose.Types.ObjectId(),
         post,
-        time: moment().format('h:mma D-MMM-YYYY'),
+        time: moment().add(6, 'hours').format('h:mma D-MMM-YYYY'),
         count: 0,
 
       });
