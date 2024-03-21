@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Login from "./Components/Login";
-import PostComponent from "./Components/PostComment";
+import Down from './Components/Down';
 
 function App() {
   
@@ -35,18 +33,19 @@ function App() {
   }, [loggedIn]);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<Login loggedIn={loggedIn} onLogin={handleLogin} error={error} />}
-        />
-        <Route
-          path="/post"
-          element={loggedIn ? <PostComponent onLogout={handleLogout} /> : <Navigate to="/" />}
-        />
-      </Routes>
-    </Router>
+    <Down/>
+    // <Router>
+    //   <Routes>
+    //     <Route
+    //       path="/"
+    //       element={<Login loggedIn={loggedIn} onLogin={handleLogin} error={error} />}
+    //     />
+    //     <Route
+    //       path="/post"
+    //       element={loggedIn ? <PostComponent onLogout={handleLogout} /> : <Navigate to="/" />}
+    //     />
+    //   </Routes>
+    // </Router>
   );
 }
 
