@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from "./Components/Login";
 import PostComponent from "./Components/PostComment";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
   const [error, setError] = useState('');
 
   const handleLogin = (username, password) => {
-    
     if (username === 'SWE-20' && password === ':werocks') {
       console.log('Login successful');
-      setLoggedIn(true); 
-      setError(''); 
+      setLoggedIn(true);
+      setError('');
+      
+      localStorage.setItem('loggedIn', 'true');
     } else {
       console.log('Invalid credentials');
       setError('Invalid username or password');
     }
   };
+
+  
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('loggedIn');
+  };
+
+  useEffect(() => {
+    
+    if (!loggedIn && window.location.pathname !== '/') {
+      window.location.href = '/';
+    }
+  }, [loggedIn]);
 
   return (
     <Router>
@@ -28,7 +43,7 @@ function App() {
         />
         <Route
           path="/post"
-          element={loggedIn ? <PostComponent /> : <Navigate to="/" />}
+          element={loggedIn ? <PostComponent onLogout={handleLogout} /> : <Navigate to="/" />}
         />
       </Routes>
     </Router>

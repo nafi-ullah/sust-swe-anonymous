@@ -10,7 +10,12 @@ const postSchema = mymongo.Schema({
     time: {
         required: true,
         type: String,
+    },
+    count: {
+        required: true,
+        type: Number,
     }
+
     
 });
 

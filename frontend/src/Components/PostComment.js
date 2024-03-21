@@ -2,6 +2,7 @@ import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import imgUser from "../assets/anonymous-user.png";
 import imgComment from "../assets/anonymous_comment.png";
+import imgbg from "../assets/post-bg.png";
 
 const PostComponent = () => {
   const [postContent, setPostContent] = useState("");
@@ -68,6 +69,8 @@ const PostComponent = () => {
       setCommentContent("");
       // Refresh the comments after posting
       fetchComments(postId);
+      // Update the post with the new comment count
+      fetchPosts();
     } catch (error) {
       console.error("Error posting comment:", error.message); // Log error to console
     }
@@ -100,7 +103,12 @@ const PostComponent = () => {
 
   return (
     <div>
-      <div className="w-6/12 mx-auto mt-4 p-4 border border-gray-300 rounded">
+      <div className="relative">
+      <img src={imgbg} alt="SWE-20" className="z-0 w-fit" />
+
+      <div className="absolute top-0 left-0 w-full h-full bg-gray-800 opacity-50"></div>
+
+      <div className="absolute top-7/8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-1/2 p-4 border border-gray-300 rounded z-10">
         <form onSubmit={handlePostSubmit}>
           <textarea
             className="w-full h-24 p-2 mb-2 border border-gray-300 rounded"
@@ -113,15 +121,16 @@ const PostComponent = () => {
           </button>
         </form>
       </div>
+    </div>
 
       <div>
-        <h2 className="text-xl font-semibold mt-8 flex justify-center">
+        <h2 className="text-xl font-semibold mt-32 flex justify-center">
           All Posts
         </h2>
         {posts.map((post) => (
           <div
             key={post._id}
-            className="w-6/12 mx-auto mt-4 p-4 border border-gray-300 rounded"
+            className="w-11/12 md:w-1/2 mx-auto m-4 p-4 border border-gray-300 rounded"
           >
             <div className="flex">
               <img
@@ -139,10 +148,12 @@ const PostComponent = () => {
             </p>
             <div className="flex justify-end">
               <Button
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold p-px rounded my-2"
+                className="bg-gray-500 hover:bg-gray-600 text-white font-bold p-px rounded-3xl my-2"
                 onClick={() => handleCommentButtonClick(post._id)}
               >
-                Comment
+                <p>
+                  Comment({post.count})
+                  </p>
               </Button>
             </div>
             {selectedPostId === post._id && (
