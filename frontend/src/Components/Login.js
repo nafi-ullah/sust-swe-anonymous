@@ -18,11 +18,14 @@ const Login = ({ loggedIn, onLogin, error }) => {
   }
 
   return (
-    <div className="h-[1800px] flex justify-center" style={{backgroundImage: `url(${imgbg})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '100%'}}>
-      <div className="max-w-md w-fit mt-40 h-80 space-y-8 bg-white bg-opacity-80 p-8 rounded-lg shadow-lg overflow-auto">
+    <div className='flex flex-col justify-center items-center min-w-fit lg:h-full min-h-full'>
+      <div className="-z-10 ">
+      <img src={imgbg} alt="SWE20"/>
+      </div>
+      <div className="max-w-md w-fit mt-40 h-80 space-y-8 bg-white bg-opacity-80 p-8 rounded-lg shadow-lg overflow-auto absolute top-10">
         <div>
-          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">Welcome to</h2>
-          <h2 className="mt-1 text-center text-2xl font-bold text-gray-900">Not Gonna Lie SWE-20</h2>
+          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">Welcome</h2>
+          <h2 className="mt-1 text-center text-2xl font-bold text-gray-900">Not Gonna Lie to SWE-20</h2>
         </div>
         <form className="mt-8 space-y-3" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
@@ -83,6 +86,7 @@ const Login = ({ loggedIn, onLogin, error }) => {
       </div>
     </div>
   );
+  
 };
 
 export default Login;

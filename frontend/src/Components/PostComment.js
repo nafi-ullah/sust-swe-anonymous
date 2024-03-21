@@ -10,12 +10,14 @@ const PostComponent = () => {
   const [commentContent, setCommentContent] = useState("");
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [comments, setComments] = useState([]);
+  const [clickable,setClickable] = useState(true);
 
   const handlePostSubmit = async (e) => {
+    setClickable(false);
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/post", {
+      const response = await fetch("http://swe-ngl-backend.vercel.app/api/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +31,7 @@ const PostComponent = () => {
 
       // Clear the input after successful posting
       setPostContent("");
+      setClickable(true);
       // Refresh the posts after posting
       fetchPosts();
     } catch (error) {
@@ -38,7 +41,7 @@ const PostComponent = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/post");
+      const response = await fetch("http://swe-ngl-backend.vercel.app/api/post");
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
@@ -53,7 +56,7 @@ const PostComponent = () => {
 
   const handleCommentSubmit = async (postId) => {
     try {
-      const response = await fetch("http://localhost:5000/api/comment", {
+      const response = await fetch("http://swe-ngl-backend.vercel.app/api/comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +82,7 @@ const PostComponent = () => {
   const fetchComments = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comments?postid=${postId}`
+        `http://swe-ngl-backend.vercel.app/api/comments?postid=${postId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch comments");
@@ -116,9 +119,13 @@ const PostComponent = () => {
             value={postContent}
             onChange={(e) => setPostContent(e.target.value)}
           ></textarea>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Post
-          </button>
+          {
+            clickable?(
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Post
+              </button>
+            ):(null)
+          }
         </form>
       </div>
     </div>
