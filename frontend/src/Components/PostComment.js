@@ -123,7 +123,7 @@ const PostComponent = () => {
           ></textarea>
           {
             clickable?(
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" disabled={!postContent.trim()}>
                 Post
               </button>
             ):(null)
@@ -178,6 +178,7 @@ const PostComponent = () => {
                     <button
                       className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                       onClick={() => handleCommentSubmit(post._id)}
+                      disabled={!postContent.trim()}
                     >
                       Submit Comment
                     </button>
