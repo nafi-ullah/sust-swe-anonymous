@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from "./Components/Login";
 import PostComponent from "./Components/PostComment";
 
@@ -9,7 +9,7 @@ function App() {
   const [error, setError] = useState('');
 
   const handleLogin = (username, password) => {
-    if (username === 'SWE-20' && password === ':werocks') {
+    if (username === 'swe20' && password === 'interactionrocks') {
       console.log('Login successful');
       setLoggedIn(true);
       setError('');
